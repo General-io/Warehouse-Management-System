@@ -14,9 +14,9 @@ spring:
     username: root
   jpa:
     hibernate:
-      ddl: update
+      ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
     show-sql: true
