@@ -23,7 +23,7 @@ public class Employee {
     @Column(name = "id",
             updatable = false
     )
-    private Long id;
+    private Integer id;
 
     @Column( name = "employeeId",
              nullable = false
