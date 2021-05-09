@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.Period;
 
 
 @Setter
@@ -36,7 +38,7 @@ public class Employee {
     @Column( nullable = false)
     private String lastName;
 
-    @Column( nullable = false)
+    @Transient
     private int age;
 
     @Column( nullable = false)
@@ -57,17 +59,26 @@ public class Employee {
     @Column( nullable = false)
     private String country;
 
+    @Column(nullable = false)
+    LocalDate birthday;
 
-    public Employee(Long employeeId, String name, String lastName, int age, String gender, int telephone, String ort, String street, int streetNo, String country) {
+
+
+    public Employee(Long employeeId, String name, String lastName, int age, String gender, int telephone, String ort, String street, int streetNo, String country, LocalDate birthday) {
         this.employeeId = employeeId;
         this.firstname = name;
         this.lastName = lastName;
-        this.age = age;
+        this.age = getAge();
         this.gender = gender;
         this.telephone = telephone;
         this.ort = ort;
         this.street = street;
         this.streetNo = streetNo;
         this.country = country;
+        this.birthday = birthday;
+    }
+
+    public int getAge() {
+       return Period.between(birthday, LocalDate.now()).getYears();
     }
 }

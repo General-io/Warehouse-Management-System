@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping(path = "/employee")
 public class EmployeeController {
@@ -49,8 +51,14 @@ public class EmployeeController {
 
     @PutMapping("put/{id}")
     public HttpStatus updateEmployee(@PathVariable int id,
-                                     @RequestParam String firstname) throws NotFoundException {
+                                     @RequestParam String firstname) throws NotFoundException {  // put/1&firstname=beispiel
         employeeService.updateEmployee(id, firstname);
+        return HttpStatus.ACCEPTED;
+    }
+
+    @DeleteMapping("delete/{id}")
+    public HttpStatus deleteEmployee(@PathVariable int id){
+        employeeService.deleteEmployeeById(id);
         return HttpStatus.ACCEPTED;
     }
 }

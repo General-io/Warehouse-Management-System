@@ -31,11 +31,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployeeById(int id) throws NotFoundException {
-        Employee employee = employeeRepository.findEmployeeById(id);
-        if (employee  == null) {
-            LOGGER.error("Employee Not Found By Id: " + id);
-            throw new NotFoundException("");
-        }else return employee;
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Employee with id " + id + " does not exists"
+
+                ));
+        return employee;
     }
 
     @Override
@@ -69,5 +70,14 @@ public class EmployeeServiceImpl implements EmployeeService {
                 !Objects.equals(employee.getFirstname(), firstname)) {
             employee.setFirstname(firstname);
         }
+    }
+
+    @Override
+    public void deleteEmployeeById(int id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Employee with id " + id + " does not exists"
+                ));
+        employeeRepository.delete(employee);
     }
 }

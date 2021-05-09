@@ -16,4 +16,7 @@ public interface EmployeeService {
     public void addEmployee(Employee employee);
 
     public void updateEmployee(int id, String name) throws NotFoundException;
+
+    public void deleteEmployeeById(int id);
+
 }
