@@ -1,5 +1,6 @@
 package de.progex.WarehouseManagementSystem.tables;
 
+import de.progex.WarehouseManagementSystem.enumeration.Gender;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -38,11 +39,12 @@ public class Employee {
     @Column( nullable = false)
     private String lastName;
 
-    @Transient
+    @Transient  // wird in der datenbank nicht abgespeichert
     private int age;
 
     @Column( nullable = false)
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Column( nullable = false)
     private int telephone;
@@ -64,7 +66,9 @@ public class Employee {
 
 
 
-    public Employee(Long employeeId, String name, String lastName, int age, String gender, int telephone, String ort, String street, int streetNo, String country, LocalDate birthday) {
+
+
+    public Employee(Long employeeId, String name, String lastName, int age, Gender gender, int telephone, String ort, String street, int streetNo, String country, LocalDate birthday) {
         this.employeeId = employeeId;
         this.firstname = name;
         this.lastName = lastName;
