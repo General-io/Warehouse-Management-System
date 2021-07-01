@@ -1,5 +1,6 @@
 package de.progex.WarehouseManagementSystem.resources;
 
+import de.progex.WarehouseManagementSystem.Service.EmployeeService;
 import de.progex.WarehouseManagementSystem.Service.impl.EmployeeServiceImpl;
 import de.progex.WarehouseManagementSystem.tables.Employee;
 import javassist.NotFoundException;
@@ -17,10 +18,10 @@ import java.util.List;
 @RequestMapping(path = "/employee")
 public class EmployeeController {
 
-    EmployeeServiceImpl employeeService;
+    EmployeeService employeeService;
 
     @Autowired
-    public EmployeeController(EmployeeServiceImpl employeeService) {
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
@@ -51,8 +52,8 @@ public class EmployeeController {
 
     @PutMapping("put/{id}")
     public HttpStatus updateEmployee(@PathVariable int id,
-                                     @RequestParam String firstname) throws NotFoundException {  // put/1&firstname=beispiel
-        employeeService.updateEmployee(id, firstname);
+                                     @RequestBody Employee employee) throws NotFoundException {  // put/1&firstname=beispiel
+        employeeService.updateEmployee(id, employee);
         return HttpStatus.ACCEPTED;
     }
 

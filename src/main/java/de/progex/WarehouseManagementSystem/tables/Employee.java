@@ -50,6 +50,9 @@ public class Employee {
     private int telephone;
 
     @Column( nullable = false)
+    private String department;
+
+    @Column( nullable = false)
     private String ort;
 
     @Column( nullable = false)

@@ -60,16 +60,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional  // durch transactional wird das Employeeobject das hier benutzt wird auch direkt in der datenbank veränderrt
-    public void updateEmployee(int id, String firstname) throws NotFoundException {
+    public void updateEmployee(int id, Employee newEmployee) throws NotFoundException {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException(
                         "Employee with id " + id + " does not exists"
                 ));
-        if (firstname != null &&
-                firstname.length() > 0 &&
-                !Objects.equals(employee.getFirstname(), firstname)) {
-            employee.setFirstname(firstname);
-        }
+        if (newEmployee.getFirstname() != "")
+        employee.setFirstname(newEmployee.getFirstname());
+        if (newEmployee.getDepartment() != "")
+        employee.setDepartment(newEmployee.getDepartment());
+        if (newEmployee.getLastName() != "")
+        employee.setLastName(newEmployee.getLastName());
+        if (newEmployee.getStreet() != "")
+        employee.setStreet(newEmployee.getStreet());
+        if (newEmployee.getStreetNo() != 0)
+        employee.setStreetNo(newEmployee.getStreetNo());
+        if (newEmployee.getCountry() != "")
+        employee.setCountry(newEmployee.getCountry());
+        if (newEmployee.getTelephone() != 0)
+        employee.setTelephone(newEmployee.getTelephone());
+        if (newEmployee.getOrt() != "")
+        employee.setOrt(newEmployee.getOrt());
     }
 
     @Override
